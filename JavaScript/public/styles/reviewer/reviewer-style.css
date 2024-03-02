@@ -1,0 +1,229 @@
+body{
+  margin: 0;
+  background: url(../media-repo/website-background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0px;
+  padding: 0px;
+  
+}
+
+.clrblue{
+  color: #031749 !important;
+}
+
+.clrwhite{
+  color: white !important;
+}
+
+#column-titles th{
+  cursor: pointer;
+  background-color: #031749;
+  transition: background-color 0.3s ease;
+}
+
+#column-titles th:hover{
+  background-color: #2a4da6;
+}
+
+.reviewer-container{
+  align-content: center;
+  max-width: 1500px;
+  margin: auto;
+  position: relative;
+}
+
+.reviewer-container-bg{
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+
+.reviewer-container-back{
+  width: 100%;
+  
+}
+
+
+.button-list {
+  display: inline-block;
+  margin-right: 10px; 
+  
+  
+}
+
+.button-list-danger, .button-list-gold {
+  display: inline-block;
+  margin-right: 10px; 
+}
+
+.table tr td .button-list-danger .btn {
+  background-color: #9F2929;
+}
+
+.table tr td .button-list-gold .btn {
+  background-color: #17284E;
+  color: #BEA973;
+}
+
+.table tr td .button-list .btn{
+  background-color: #17284E;
+}
+
+h4.top {
+  color: white;
+  text-align: center;
+}
+
+.review-document h2{
+  text-align: left;
+  color: white;   
+  padding-right: 70%;
+  font-weight: bold;
+}
+
+.review-document a .back{
+  color: white;
+  background-color: #8b2a5b;  
+  font-weight: bold;
+  padding-right: 70%;
+  margin-left: -500px;
+  font-weight: bold;  
+
+}
+
+.row .col-8, .col-2{
+color: white;
+}
+
+.row, .row .col-2 .back {
+color: white;
+
+}
+.row .col .save {
+color: #BEA973;
+}
+
+.back{
+text-align: right;
+}
+
+/* div.col-5 {
+text-align: right;
+}
+
+div.col-2 {
+text-align: center;
+}
+
+div.col-3 {
+text-align: left;
+} */
+
+div.new-col{
+text-align: left;
+}
+/* .row-buttons{
+margin-top: 50px;
+} */
+
+button#pending-btn, button#returned-btn, 
+button#approved-btn { 
+background-color: #17284E;
+}
+
+p.statement{
+  color: #17284E;
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+}
+
+#filename-pdf, #requester, #pdfname, #doctype, #docsize, #pagenum, #reqdate, #version, #user, #revofcid, #remarks{
+  display: none;
+}
+
+
+button#pending-btn, button#returned-btn, 
+button#approved-btn {
+  padding: 10px;
+  margin: 5px;
+  font-size: 18px;
+  width: 40%; /* Set width as a percentage for responsiveness */
+  max-width: 200px; /* Set width to 100% for full width on smaller screens */
+}
+
+#filter-buttons{
+  text-align: center;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  margin: 20px 0;
+  white-space: nowrap;
+}
+
+table, thead {
+  padding: 12px;
+  text-align: left;
+  min-width: 200px; 
+}
+
+.table-div-reviewer{
+  overflow: scroll;
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+
+
+/* Media Queries */
+@media only screen and (min-width: 376px) {
+  button#pending-btn, button#returned-btn, 
+  button#approved-btn {
+      width: 60%; 
+      font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 481px) {
+  button#pending-btn, button#returned-btn, 
+  button#approved-btn {
+      width: 50%; 
+      font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  button#pending-btn, button#returned-btn, 
+  button#approved-btn {
+      width: 40%;   
+    }
+}
+
+@media only screen and (min-width: 321px) {
+
+  button#pending-btn, button#returned-btn, 
+  button#approved-btn {
+      width: 70%; 
+
+  }
+}
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+

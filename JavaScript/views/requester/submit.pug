@@ -1,0 +1,211 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Requester
+    link(rel='icon' type='image/slu-icon' href='../../public/images/slu-logo.png')  
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css', integrity='sha512-7bCSve/Z1EfOX/5+RnzzkbOWpVq1Cn63gVNGH9I81V5KUkT6ChqA5BxcYgCJ9DVJS4AnkaS9ViH+bhu+R1J7eA==', crossorigin='anonymous', referrerpolicy='no-referrer')
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css')
+    link(rel='stylesheet', href='../../public/styles/requester/style.css') 
+    link(rel='stylesheet', href='../../public/styles/reusable-files/style.css')
+  body
+    special-requester-header
+    .img-background(style="background-image: url('../../public/images/website-background.png');")
+      .p-5.container.d-flex.justify-content-center.align-items-center
+        .bg-center.d-flex.flex-column.rounded.text-start
+          h3.bi.bi-box-arrow-in-down.text-light.fw-bold.pt-4.mx-4   Submit a Document
+          form#myform(action='/submit-document/send-request', method='post', enctype='multipart/form-data')
+            .m-4.doc-title.text-white.fw-bold
+              label.form-label(for='typeOfDoc') Type of Document
+              input#typeOfDoc.form-control(type='typeOfDocu', aria-describedby='typeOfDocHelp', name='docuement-type', required)
+            .m-4.doc-title.text-white.fw-bold
+              label.form-label(for='titleOfDoc') Title of Document
+              input#titleOfDoc.form-control(type='titleOfDoc', name='document-title', required)
+            h2.mx-4.fw-bold.text-white.position-relative Upload the Document
+            .mx-4.bg-submit.rounded.color-white.position-relative
+              .file-upload(ondrop='dropHandler(event)', ondragover='dragOverHandler(event)', ondragleave='dragLeaveHandler(event)')
+                .file-upload-wrap
+                  input.file-upload-input(type='file', onchange='readURL(this);', accept='.pdf', name='file', required)
+                  .drag-text
+                    h3 Click here to Browse a File
+                .file-upload-content
+                  i.icon-submit.bi.bi-file-pdf.file-upload-icon
+                  .file-title-wrap
+                    button.remove-file(type='button', onclick='removeUpload()')
+                      | Remove 
+                      span.file-title Uploaded file
+            .color-white.right-container.position-absolute.rounded
+              h4.pt-3.px-3.pb-2.fw-bold.text-color Order of Review
+              .office1
+                p.border.border-dark.office-p.color-white.rounded.px-2.pt-1 OGRAA
+              .office2
+                p.border.border-dark.office-p.color-white.rounded.px-2.pt-1 OVP for Academic Affairs
+              .office3
+                p.border.border-dark.office-p.color-white.rounded.px-2.pt-1 OVP for Finance
+              .office4
+                p.border.border-dark.office-p.color-white.rounded.px-2.pt-1 Office of Legal Affairs
+              .office5
+                p.border.border-dark.office-p.color-white.rounded.px-2.pt-1 OVP for Administration
+            button.btn.btn-sub.btn-primary(type='submit' onclick="handleSubmit('submit')" disabled='') Submit
+            button.mr-2.btn.sub-cancel.rounded.button.bi.bi-x-circle-fill(type='button', onclick="handleCancel(event)")
+              span
+              |  Cancel
+    br 
+    br
+    br          
+    special-footer
+    script.jsbin(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+    script(src='../../public/scripts/common/script.js')
+    script(src='../../public/scripts/common/script.js')
+    script(src='../../public/scripts/requester/requester.js')
+    script(type='module' src='/public/scripts/common/show-alert.js')
+    script(type='module' src='/public/scripts/requester/requester-header-functionalities.js')
+    script.
+      var actualFile = null;
+      function readURL(file) {
+        if (file.files && file.files[0]) {
+          console.log("readURL enter")
+          actualFile = file;
+          var reader = new FileReader();
+          reader.onload = function(event) {
+          $('.file-upload-wrap').hide();
+          $('.icon-submit').attr('src', event.target.result);
+          $('.file-upload-content').show();
+          $('.file-title').html(file.files[0].name);
+          // Disable the "Browse File" button
+          $('#browseButton').prop('disabled', true);
+          console.log(file.files[0].name);
+          };
+          reader.readAsDataURL(file.files[0]);
+        } else {
+          removeUpload();
+        }
+      }
+      function removeUpload() {
+      // Enable the file input
+        $('.file-upload-input').prop('disabled', false);
+        // Reset the file input value to allow selecting the same file
+        $('.file-upload-input').val('');
+        $('.file-upload-content').hide();
+        $('.file-upload-wrap').show();
+        // Enable the "Browse File" button
+        $('#browseButton').prop('disabled', false);
+      }
+      // Attach the validation function to the form's submit event
+      var form = document.getElementById('myform');
+      var submitButton = document.querySelector('button[type="submit"]');
+      document.addEventListener("DOMContentLoaded", function () {
+      // Attach input event listeners to check individual input field validity
+      document.getElementById("typeOfDoc").addEventListener("input", checkTypeOfDocValidity);
+      document.getElementById("titleOfDoc").addEventListener("input", checkTitleOfDocValidity);
+
+      // Attach input event listener to the file input
+      document.querySelector(".file-upload-input").addEventListener("change", checkFileValidity);
+
+      // Initial state check
+      checkFormValidity();
+      });
+
+      // Function to check validity of Type of Document input
+      function checkTypeOfDocValidity() {
+          var typeInput = document.getElementById('typeOfDoc');
+          if (!isValidInput(typeInput.value)) {
+              alert("Invalid Type of Document. Please provide a descriptive value without special characters or starting with whitespace.");
+          }
+          checkFormValidity();
+      }
+
+      // Function to check validity of Title of Document input
+      function checkTitleOfDocValidity() {
+          var titleInput = document.getElementById('titleOfDoc');
+          if (!isValidInput(titleInput.value)) {
+              alert("Invalid Title of Document. Please provide a descriptive value without special characters or starting with whitespace.");
+          }
+          checkFormValidity();
+      }
+
+      // Function to check validity of File input
+      function checkFileValidity() {
+          var fileInput = document.querySelector('.file-upload-input');
+          if (fileInput.files.length === 0) {
+              alert("Please select a file.");
+          }
+          checkFormValidity();
+      }
+      function checkFormValidity() {
+        var fileInput = document.querySelector('.file-upload-input');
+        var titleInput = document.getElementById('titleOfDoc');
+        var typeInput = document.getElementById('typeOfDoc');
+
+        // Check if the form is valid
+        var isFormValid = fileInput.files.length > 0 && isValidInput(titleInput.value) && isValidInput(typeInput.value);
+
+        // Enable or disable the submit button based on form validity
+        document.querySelector('button[type="submit"]').disabled = !isFormValid;
+      }
+      function isValidInput(value) {
+         if (/[^a-zA-Z0-9\s]/.test(value)) {
+          return false;
+         }
+        // Check if the input value starts with an alphanumeric character and allows whitespaces
+        if (!/^[a-zA-Z0-9]/.test(value)) {
+            return false;
+        }
+          return true;
+      }
+        function handleSubmit(action, event) {
+          // Get the form elements
+          var fileInput = document.querySelector('.file-upload-input');
+          var titleInput = document.getElementById('titleOfDoc');
+          var typeInput = document.getElementById('typeOfDoc');
+          // Set the form's action based on the button clicked
+          if (action === 'cancel') {
+            form.action = 'submit-document/cancel';
+            // Submit the form
+            form.submit();
+          } else if (action === 'view') {
+            form.action = 'submit-document/view';
+            form.target = '_blank';
+            // Submit the form
+            form.submit();
+          } else if (action === 'submit') {
+            if (!isValidInput(titleInput.value)) {
+              // Show the alert and prevent form submission
+              event.preventDefault();
+            } else if (!isValidInput(typeInput.value)){
+              // Show the alert and prevent form submission
+              event.preventDefault();
+            } else if (!fileInput.files.length && !titleInput.value.trim() ) {
+              // Disable the submit button and prevent form submission
+              submitButton.disabled = true;
+              event.preventDefault();
+            } else if (!fileInput.files.length) {
+              // Disable the submit button and prevent form submission
+              submitButton.disabled = true;
+              event.preventDefault();
+            } else if (!titleInput.value.trim()) {
+              // Disable the submit button and prevent form submission
+              submitButton.disabled = true;
+              event.preventDefault();
+            } else if (!typeInput.value.trim()) {
+              // Disable the submit button and prevent form submission
+              submitButton.disabled = true;
+              event.preventDefault();
+            } else {
+              form.action = 'submit-document/send-request';
+              // Submit the form
+              form.submit();
+            }
+          }
+        }
+        function handleCancel(event) {
+          window.location.href = '/requester-home';
+        }
+      

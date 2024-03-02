@@ -1,0 +1,100 @@
+//- This consists of the list of documents to be reviewed by the reviewer.
+//- Author/s: Carl Joshua Lalwet
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(
+      content="width=device-width, initial-scale=1" 
+      name="viewport"
+      )
+    title Reviewer
+    link(rel='icon' type='image/slu-icon' href='../../public/images/slu-logo.png')    
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css')
+    link(rel='stylesheet', href='../../public/styles/reusable-files/style.css')
+    link(rel='stylesheet', href='/public/styles/reviewer/reviewer-style.css')
+  body
+    special-reviewer-header
+    .img-background(style="background-image: url('../../public/images/website-background.png');")
+      .px-5.pt-5
+        h5.text-center.clrblue Logged in as: #{userData[0].acct_username} 
+        h4.text-center.clrblue #{userData[0].dept_name}
+        h1.text-center.clrblue Welcome, #{userData[0].acct_fname} #{userData[0].acct_lname}!
+
+        .reviewer-container
+            //- Filter Buttons
+            div#filter-buttons
+                button#pending-btn.btn-pending.btn.btn-primary Pending/Reviewing
+                button#returned-btn.btn-returned.btn.btn-primary Returned Documents
+                button#approved-btn.btn-approved.btn.btn-primary Approved Documents
+            section.reviewer-container-bg.bg-darkblue.p-3.rounded
+                .row
+                    .col-11 
+                        h1.fw-bold.clrwhite Documents Assigned to #{userData[0].dept_name}
+                    .col-1
+                        button.btn.btn-sm.button.rounded.btn-light(id ="show-help-button")
+                            i.bi.bi-question-circle-fill
+                            |    HELP
+                .table-div-reviewer.table-hover
+                    div#doc-data(style = 'display: none;') #{JSON.stringify(docData)}
+                    h6#top-header.clrwhite
+                    table#reviewer-table.table.rounded-3.overflow-hidden.mt-3.table-bordered
+                        //- Table Headers. Can be used to Sort Ascending and Descending.
+                        thead.thead
+                            tr#column-titles(style="user-select: none")
+                                th(data-toggle="tooltip" data-placement="top" title="Sort By Request Date") Request Date
+                                th(data-toggle="tooltip" data-placement="top" title="Sort By Title of Document") Title of Document
+                                th(data-toggle="tooltip" data-placement="top" title="Sort By Version") Version
+                                th(data-toggle="tooltip" data-placement="top" title="Sort By Document Type") Document Type
+                                th(data-toggle="tooltip" data-placement="top" title="Sort By Requester") Requester
+                                th(data-toggle="tooltip" data-placement="top" title="Sort By School") School
+                                th(data-toggle="tooltip" data-placement="top" title="Sort By Status") Status
+                                th Operations
+                        //- Dynamically generate the body of the table based on the data in docData        
+                        each item in docData
+                                tr
+                                    td= item.trn_date.toLocaleDateString() + " " + item.trn_date.toLocaleTimeString()
+                                    td(id="doc-title")= item.doc_title
+                                    td= item.version
+                                    td= item.doc_type
+                                    td= item.acct_fname + " " + item.acct_lname
+                                    td= item.school_name
+                                    td= item.trn_status
+                                    td(style='text-align: center;')
+                                        button.btn.btn-block.btn-primary(
+                                            data-filenamepdf= `${item.doc_id}-v${item.version}-${item.doc_title}`,
+                                            data-doctitle=item.doc_title,
+                                            data-doctype=item.doc_type,
+                                            data-docsize=item.file_size,
+                                            data-pagenum=item.no_of_pages,
+                                            data-reqdate=item.trn_date.toLocaleDateString() + " " + item.trn_date.toLocaleTimeString(),
+                                            data-version=item.version,
+                                            data-deptname=userData[0].dept_name,
+                                            data-requester=item.acct_username,
+                                            data-revofcid=userData[0].revofc_id,
+                                            data-trnid=item.trn_id,
+                                            class='review-button'
+                                        )
+                                            if item.trn_status == "RETURNED" || item.trn_status == "APPROVED"
+                                                b.bi.bi-eye-fill 
+                                                |   View
+                                            if item.trn_status == "PENDING"
+                                                b.bi.bi-pencil 
+                                                |   Start Review
+                                            if item.trn_status == "REVIEWING"
+                                                b.bi.bi-chat-right-text-fill
+                                                |   Continue Review                      
+        br
+        br
+        br
+        br
+        br
+        special-footer
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+    script(src='/public/scripts/common/script.js')
+    script(type="module" src="/public/scripts/common/show-alert.js")
+    script(type="module" src='/public/scripts/reviewer/reviewer-home.js')

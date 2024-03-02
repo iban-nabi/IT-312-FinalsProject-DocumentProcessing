@@ -1,0 +1,139 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin: 0 0 100px;
+}
+.navbar, .card-footer{
+    background-color: #17284E; 
+}
+
+
+a.navbar-brand:hover, a.nav-link:hover{
+    color: white;
+}
+
+.card-footer{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 11px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.img-background{
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.bg-darkblue {
+    background-color: #17284E;
+    opacity: 90%;
+}
+.text-darkblue{
+    color: #17284E;
+}
+
+.thead tr{
+    color:#ffffff;
+    background-color: #17284E;
+}
+
+tbody{
+    color:#17284E;
+    background-color: #ffffff;
+}
+#edit-btn, #archive-btn {
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    color:#ffffff;
+    background-color: #17284E;
+}
+
+.input-color{
+    border-color: #031749;
+}
+
+.prepend-color{
+    background-color: #031749;
+    border-color: #031749;
+}
+
+.color-white{
+    color: #ffffff;
+}
+
+.bg-logout{
+    text-align: right;
+    margin-left: 50px;
+}
+
+ul.navbar-nav.mr-auto{
+    margin-bottom: -7px;
+}
+
+.bg-logout a{
+    color:#ffffff;
+}
+
+.bg-logout a:hover,
+.bg-archive a:hover,
+.bg-add-user a:hover,
+.bg-logs a:hover{
+    color:#BEA973;
+}
+
+.bg-archive a.nav-link,
+.bg-add-user a.nav-link,
+.bg-logs a.nav-link{
+    margin-left: 50px;
+    font-weight: bold;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255);
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255);
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #BEA973;
+}
+
+
+#databeast-footer{
+    background-color: #17284E;
+}
+
+b.bi.bi-bell, b.bi.bi-box-arrow-right{
+    color: white;
+}
+
+b.bi.bi-bell:hover, b.bi.bi-box-arrow-right:hover{
+    color: #BEA973;
+}
+
+b.bi.bi-file-zip, b.bi.bi-file-text, b.bi.bi-person-add{
+    color: white;
+}
+
+b.bi.bi-file-zip:hover, 
+b.bi.bi-file-text:hover,
+b.bi.bi-person-add:hover{
+    color: #BEA973;
+}
+
+
+@media only screen and (max-width: 395px) {
+    a.navbar-brand{
+        font-size: 15px;
+    }
+}

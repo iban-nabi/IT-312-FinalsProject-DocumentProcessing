@@ -1,0 +1,102 @@
+doctype html
+html(lang='en')
+  head
+    link(rel='icon' type='image/slu-icon' href='../../public/images/slu-logo.png')  
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css' rel='stylesheet' integrity='sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css')
+    link(rel='stylesheet', href='../../public/styles/requester/style.css') 
+    link(rel='stylesheet', href='../../public/styles/reusable-files/style.css')
+  body
+    special-requester-header
+    .img-background(style="background-image: url('../../public/images/website-background.png');")
+      .p-5
+        section.bg-darkblue.text-light.p-3.text-center.rounded-top
+          .container.text-start
+            button.btn.btn-light(type='button', onclick=`window.location.href='/'`)
+              | Return to Home
+            h1.my-4 Document Details
+            each item in data
+              span#username(style = 'display: none;') #{item.acct_username}
+              span#docid(style = 'display: none;') #{item.doc_id}
+              span#version(style = 'display: none;') #{item.version}
+              span#doctitle(style = 'display: none;') #{item.doc_title}
+              span#doctype(style = 'display: none;') #{item.doc_type}
+              span#docsize(style = 'display: none;') #{item.file_size}
+              span#pagenum(style = 'display: none;') #{item.no_of_pages}
+              span#reqdate(style = 'display: none;') #{item.trn_date}
+              p.my-0
+                span.fw-bold Title: #{item.doc_title}
+              p.my-0
+                span.fw-bold Document Type: #{item.doc_type}
+              p.my-0
+                span.fw-bold File Size: #{item.file_size} MB
+              p.mb-4
+                span.fw-bold No. of Pages: #{item.no_of_pages}
+        section.bg-white.text-light.p-3.text-center.rounded-bottom
+          .container.text-start
+            h1.my-4.text-darkblue Document Status
+            table.table
+              thead.thead
+                tr
+                  th(scope='col') Status
+                  th(scope='col') Reviewer
+                  th(scope='col') Email
+                  th(scope='col') Date of Approval
+                  th(scope='col') Date Reviewed
+                  th(scope='col') Date Received
+              tbody
+                each item in submissionData
+                  tr
+                    th.th-color #{item.status}
+                    td #{item.reviewer}
+                    td #{item.email}
+                    td #{item.date_of_approval}
+                    td #{item.date_reviewed}
+                    td #{item.date_received}
+
+                  if (item.status == 'APPROVED' && item.reviewer == 'OVP for Administration')   
+                    h1.my-4.text-darkblue Congratulations!
+                    h4.text-darkblue Your document has completed the approval process. 
+                    button.btn.btn-primary.text-center.blue-button.text-white.mb-2(
+                      id='view-button'
+                    )
+                      i.bi.bi-check
+                      |  View Approved Document 
+                          
+
+            each item in submissionData
+              if  item.status === "RETURNED"
+                h1.my-4.text-darkblue Returned Document
+                table.table.table-striped
+                  thead.thead
+                    tr
+                      th(scope='col') Reviewer
+                      th(scope='col') Date Returned
+                      th(scope='col') Actions
+                  tbody
+                    tr
+                      td #{item.reviewer}
+                      td #{item.date_returned}
+                      td
+                        button.btn.text-center.red-button.btn-primarytext-darkblue.mr-2(
+                          id='view-button'
+                        )
+                          i.bi.bi-eye
+                          |  View Returned Document
+                        button.btn.text-center.yellow-button.btn-primarytext-darkblue(type='submit', onclick=`window.location.href='/document-details/resubmit-document'`)
+                          i.bi.bi-paperclip
+                          |  Resubmit Document
+    br
+    br
+    br
+    br
+    special-footer
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+    script(src='../../public/scripts/common/script.js')
+    script(src='../../public/scripts/requester/requester.js')
+    script(type="module" src="/public/scripts/common/show-alert.js")
+    script(type="module" src='/public/scripts/requester/requester-header-functionalities.js')

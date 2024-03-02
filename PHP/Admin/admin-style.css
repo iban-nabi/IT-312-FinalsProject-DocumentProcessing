@@ -1,0 +1,215 @@
+body{
+    margin: 0;
+    background: url(../media-repo/website-background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+.main-container{
+    align-content: center;
+    max-width: 1500px;
+    margin: auto;
+    position: relative;
+    
+}
+
+
+.container{
+    background-color: #17284ede;
+    position: absolute;
+    left: 13%;
+    top: 13%;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    
+    
+    
+}
+
+.btn-reviewer, .btn-requester{
+    width: 170px;
+    margin-bottom: -150px
+}
+
+.sorting-container{
+    background-color: #17284ede;
+    position: absolute;
+    left: 0.5%;
+    top: 21%;
+    width: 12%;
+    height: 40%;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+h2#head {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+h5.sort-table{
+    margin-top: 15px;
+    font-weight: bold;
+    margin-bottom: -63px;
+}
+h6, .form-check{
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.bg-darkblue{
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.bg-darkblue-container{
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 90px;
+    margin-bottom: 50px;
+}
+
+
+
+.bg-white{
+    height: 700px;
+    position: relative;
+}
+
+.add-user h1{
+    text-align: left;
+    color: #17284E;   
+    padding-right: 70%;
+    font-weight: bold;
+    
+}
+
+.add-user a h4:hover{
+    color:#BEA973;
+}
+
+.add-user a h4{
+    color: #17284E;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 25px;
+
+
+}
+
+
+.add-user {
+    display: flex;
+    
+}
+.add-user h1, .add-user a h4{
+    display:inline-block;
+}
+
+.sub-container{
+    margin-top: 20px;
+}
+
+ label{
+    font-size: 21px;
+    font-weight: bold;
+ }
+
+ .form-group{
+    margin-top: 50px;
+ }
+
+  .intro h1{
+    color: #17284E; 
+    font-weight: bold; 
+    margin-left: 20px;
+    margin-top: -30px;;
+    
+  }
+
+  .new-bg-white{
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+
+
+  .table-content{
+    background-color: #C6C6C6;
+  }
+
+  table {
+    width: 100%;
+    margin: 20px 0;
+    white-space: nowrap;
+    
+  }
+  
+  table, thead {
+    padding: 12px;
+    text-align: left;
+    min-width: 200px; 
+  }
+
+  thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.table-div-logs{
+    overflow: scroll;
+    overflow-y: hidden;
+}
+
+.bg-darkblue-container{
+    overflow: scroll;
+    overflow-y: hidden;
+    
+}
+
+
+  button.btn-edit.btn.btn-primary{
+    background-color: #7E3D1F;
+    position: absolute;
+    right: 0;
+    margin-top: 160px;
+    margin-right: 20px;
+}
+
+button.btn-create.btn.btn-primary{
+    background-color: #7E3D1F;
+    position: absolute;
+    right: 0;
+    margin-top: 160px;
+    margin-right: 20px;
+}
+
+@media only screen and (max-width: 1408px) {
+    button.btn-edit.btn.btn-primary{
+        background-color: #7E3D1F;
+        position: absolute;
+        right: 0;
+        margin-top: 120px;
+        
+}
+}
+  
+  
+
+   
+
+

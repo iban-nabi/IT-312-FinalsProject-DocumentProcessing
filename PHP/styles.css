@@ -1,0 +1,22 @@
+h1 {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+
+#accounts-table {
+    border-collapse: collapse;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#accounts-table th,
+#accounts-table td {
+    border: 1px solid #ddd; 
+    padding: 8px; 
+    text-align: left; 
+}
+
+#accounts-table th {
+    background-color: #f2f2f2; 
+}

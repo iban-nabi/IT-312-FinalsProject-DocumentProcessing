@@ -1,0 +1,129 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Requester
+    link(rel='icon' type='image/slu-icon' href='../../public/images/slu-logo.png')  
+    link(href='https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css', rel='stylesheet', integrity='sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65', crossorigin='anonymous')
+    link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css')
+    link(rel='stylesheet', href='../../public/styles/requester/style.css')
+    link(rel='stylesheet', href='../../public/styles/reusable-files/style.css')
+  body
+    special-requester-header
+    .img-background(style="background-image: url('../../public/images/website-background.png');")
+      .p-5
+        .bg-darkblue.rounded.text-start.p-2
+          h3.bi.bi-box-arrow-in-down.text-light.fw-bold.pt-5.mx-5   Resubmit a Document
+          form#form(method='POST', enctype='multipart/form-data')
+            h2.mx-5.pb-4.fw-bold.text-white.position-relative Upload the Document
+            .mx-5.mb-4.rounded.color-white.position-relative
+              .file-upload(ondrop='dropHandler(event)', ondragover='dragOverHandler(event)', ondragleave='dragLeaveHandler(event)')
+                .file-upload-wrap
+                  input.file-upload-input(type='file', onchange='readURL(this);', accept='.pdf', name='file')
+                  .drag-text
+                    h3 Click here to Browse a File
+                .file-upload-content
+                  i.icon-submit.bi.bi-file-pdf.file-upload-icon
+                  .file-title-wrap
+                    button.remove-file-resubmit(type='button', onclick='removeUpload()')
+                      | Remove 
+                      span.file-title Uploaded file
+          .m-5.text-right
+            button.btn.btn-primary.mr-lg-2.mr-md-2.mr-sm-2(type='submit', onclick="setAction('submit')") Submit
+            button.btn.btn-light(type='button', onclick="window.location.href='/'") Return to Home
+            
+    br
+    br
+    br
+    special-footer
+    script.jsbin(src='https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css' integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js' integrity='sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl' crossorigin='anonymous')
+    script(src='https://code.jquery.com/jquery-3.2.1.slim.min.js' integrity='sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN' crossorigin='anonymous')
+    script(src='https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js' integrity='sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q' crossorigin='anonymous')
+    script(src='../../public/scripts/common/script.js')
+    script(type="module" src="/public/scripts/common/show-alert.js")
+    script(type="module" src='/public/scripts/requester/requester-header-functionalities.js')
+    script.
+      function setAction(action, event) {
+          // Get the form element
+          var form = document.getElementById('form');
+          var fileInput = document.querySelector('.file-upload-input');
+          // Set the form's action based on the button clicked
+          if (action === 'cancel') {
+              form.action = 'submit-document/cancel';
+              // Submit the form
+              form.submit();
+          } else if (action === 'view') {
+              form.action = 'submit-document/view';
+              form.target = '_blank';
+              // Submit the form
+              form.submit();
+          } else if (action === 'submit') {
+              if (!fileInput.files.length && !titleInput.value.trim()) {
+                  alert("Please attach a file and provide a title before submitting.");
+                  event.preventDefault(); // Prevent form submission
+              } else if (!fileInput.files.length) {
+                  alert("Please attach a file before submitting.");
+                  event.preventDefault(); // Prevent form submission
+              } else {
+                  form.action = '/document-details/resubmit-document/update';
+                  // Submit the form
+                  form.submit();
+              }
+          }
+      }
+
+
+      function readURL(input) {
+      if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+      $('.file-upload-wrap').hide();
+      $('.icon-submit').attr('src', e.target.result);
+      $('.file-upload-content').show();
+      $('.file-title').html(input.files[0].name);
+      // Disable the "Browse File" button
+      $('#browseButton').prop('disabled', true);
+      };
+      reader.readAsDataURL(input.files[0]);
+      } else {
+      removeUpload();
+      }
+      }
+      function removeUpload() {
+      // Enable the file input
+      $('.file-upload-input').prop('disabled', false);
+      // Reset the file input value to allow selecting the same file
+      $('.file-upload-input').val('');
+      $('.file-upload-content').hide();
+      $('.file-upload-wrap').show();
+      // Enable the "Browse File" button
+      $('#browseButton').prop('disabled', false);
+      }
+      // Handle drop event
+      function dropHandler(event) {
+      event.preventDefault();
+      $('.file-upload-wrap').removeClass('file-dropping');
+      var files = event.dataTransfer.files;
+      handleDroppedFiles(files);
+      }
+      // Handle drag over event
+      function dragOverHandler(event) {
+      event.preventDefault();
+      $('.file-upload-wrap').addClass('file-dropping');
+      }
+      // Handle drag leave event
+      function dragLeaveHandler(event) {
+      event.preventDefault();
+      $('.file-upload-wrap').removeClass('file-dropping');
+      }
+      // Handle dropped files
+      function handleDroppedFiles(files) {
+      // Check if files exist and handle them as needed
+      if (files.length > 0) {
+      readURL({ files: [files[0]] });
+      }
+      }
